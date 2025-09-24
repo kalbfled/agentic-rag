@@ -15,12 +15,13 @@ export const metadata = {
   title: "Agentic RAG",
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
-    </html>
-  );
+export default function RootLayout({ children })
+{
+    return (
+        <html lang="en">
+            <body className={`${geistSans.variable} ${geistMono.variable}`}>
+                {children}
+            </body>
+        </html>
+    );
 }
