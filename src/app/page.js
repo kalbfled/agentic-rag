@@ -16,17 +16,20 @@ export default function Home()
 
     async function submitQuery(event)
     {
-        // TODO - Clean user data?
-        const query = document.getElementById("query" + queries.length).value;
-        console.debug(query);
+        // TODO - Clean user data
+        const textbox = document.getElementById("query" + queries.length);
+        console.debug(textbox.value);
+
+        if (textbox.value === "")
+            return;
 
         const response = await fetch(OLLAMA_URL, {
             method: "POST",
             body: JSON.stringify({
-                // TODO - Handle streaming response?
-                stream: false,
                 model: OLLAMA_MODEL,
-                prompt: query,
+                prompt: textbox.value,
+                // TODO - Handle streaming response
+                stream: false,
             }),
         });
 
@@ -34,9 +37,10 @@ export default function Home()
         {
             const result = await response.json();
             console.debug(result);
-            setQueries(queries.concat([query]));
+            setQueries(queries.concat([textbox.value]));
             setResponses(responses.concat([result.response]));
-            document.getElementsByTagName("textarea")[0].value = "";
+            // document.getElementsByTagName("textarea")[0].value = "";
+            textbox.value = "";
         }
         else
             console.error(response.status);
